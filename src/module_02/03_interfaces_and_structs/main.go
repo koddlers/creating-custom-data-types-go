@@ -14,6 +14,7 @@ func main() {
 		fmt.Printf("An error occurred setting twitter handler: %s\n", err.Error())
 	}
 
+	fmt.Println(p.TwitterHandler())
 	fmt.Println("ID:", p.ID())
 	fmt.Println(p.FullName())
 }
