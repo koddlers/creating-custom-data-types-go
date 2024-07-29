@@ -7,6 +7,14 @@ import (
 )
 
 func main() {
-	var p organization.Identifiable = organization.Person{}
-	fmt.Println(p.ID())
+	p := organization.Person{
+		FirstName: "James",
+		LastName:  "Wilson",
+	}
+
+	fmt.Println(p.FirstName, p.LastName)
+	p.FirstName = "Collin"
+	fmt.Println(p.FirstName, p.LastName)
+
+	fmt.Println("ID:", p.ID())
 }
