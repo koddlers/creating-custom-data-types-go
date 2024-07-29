@@ -7,14 +7,8 @@ import (
 )
 
 func main() {
-	p := organization.Person{
-		FirstName: "James",
-		LastName:  "Wilson",
-	}
-
-	fmt.Println(p.FirstName, p.LastName)
-	p.FirstName = "Collin"
-	fmt.Println(p.FirstName, p.LastName)
+	p := organization.NewPerson("James", "Wilson")
 
 	fmt.Println("ID:", p.ID())
+	fmt.Println(p.FullName())
 }
