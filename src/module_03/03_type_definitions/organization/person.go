@@ -6,8 +6,18 @@ import (
 	"strings"
 )
 
-// this is an alias for the `string` type
-type TwitterHandler = string
+type Handler struct {
+	handle string
+	name   string
+}
+
+// this is a type declaration
+type TwitterHandler string
+
+func (th TwitterHandler) RedirectUrl() string {
+	cleanHandler := strings.TrimPrefix(string(th), "@")
+	return fmt.Sprintf("https://www.twitter.com/%s", cleanHandler)
+}
 
 type Identifiable interface {
 	ID() string
@@ -37,7 +47,7 @@ func (p *Person) ID() string {
 func (p *Person) SetTwitterHandler(handler TwitterHandler) error {
 	if len(handler) == 0 {
 		p.twitterHandler = handler
-	} else if !strings.HasPrefix(handler, "@") {
+	} else if !strings.HasPrefix(string(handler), "@") {
 		return errors.New("twitter handler must start with an @ symbol")
 	}
 
