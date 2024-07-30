@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/koddlers/creating-custom-data-types-go.git/src/module_03/organization"
+	"github.com/koddlers/creating-custom-data-types-go.git/src/module_03/02_type_aliases/organization"
 )
 
 func main() {
