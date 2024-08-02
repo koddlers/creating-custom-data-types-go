@@ -23,14 +23,43 @@ type Identifiable interface {
 	ID() string
 }
 
+type Citizen interface {
+	Identifiable
+	Country() string
+}
+
 type socialSecurityNumber string
 
-func NewSocialSecurityNumber(value string) Identifiable {
+func NewSocialSecurityNumber(value string) Citizen {
 	return socialSecurityNumber(value)
 }
 
 func (ssn socialSecurityNumber) ID() string {
 	return string(ssn)
+}
+
+func (ssn socialSecurityNumber) Country() string {
+	return "United States of America"
+}
+
+type europeanUnionIdentifier struct {
+	id      string
+	country string
+}
+
+func NewEuropeanUnionIdentifier(id, country string) Citizen {
+	return europeanUnionIdentifier{
+		id:      id,
+		country: country,
+	}
+}
+
+func (eui europeanUnionIdentifier) ID() string {
+	return eui.id
+}
+
+func (eui europeanUnionIdentifier) Country() string {
+	return fmt.Sprintf("EU: %s", eui.country)
 }
 
 type Name struct {
@@ -49,16 +78,16 @@ type Employee struct {
 type Person struct {
 	Name
 	twitterHandler TwitterHandler
-	Identifiable
+	Citizen
 }
 
-func NewPerson(firstName, lastName string, identifiable Identifiable) Person {
+func NewPerson(firstName, lastName string, citizen Citizen) Person {
 	return Person{
 		Name: Name{
 			first: firstName,
 			last:  lastName,
 		},
-		Identifiable: identifiable,
+		Citizen: citizen,
 	}
 }
 
@@ -67,7 +96,7 @@ func (p *Person) ID() string {
 	// an `ID()` function that is accesible both via itself and the `Identifiable` interface.
 	// Since `ID()` is available via both ways, the one defined on the struct itself
 	// (here `Person`) gets precedence.
-	return fmt.Sprintf("Persons ID: %s", p.Identifiable.ID())
+	return fmt.Sprintf("Persons ID: %s", p.Citizen.ID())
 }
 
 func (p *Person) SetTwitterHandler(handler TwitterHandler) error {
