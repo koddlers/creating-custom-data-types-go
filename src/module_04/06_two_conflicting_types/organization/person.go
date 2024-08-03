@@ -28,6 +28,10 @@ type Citizen interface {
 	Country() string
 }
 
+type Conflict interface {
+	ID() string
+}
+
 type socialSecurityNumber string
 
 func NewSocialSecurityNumber(value string) Citizen {
@@ -81,6 +85,7 @@ type Person struct {
 	last           string
 	twitterHandler TwitterHandler
 	Citizen
+	Conflict
 }
 
 func NewPerson(firstName, lastName string, citizen Citizen) Person {
@@ -94,11 +99,7 @@ func NewPerson(firstName, lastName string, citizen Citizen) Person {
 }
 
 func (p *Person) ID() string {
-	// the `ID()` function exists on both `Identifiable` and `Person`so, `Person` has
-	// an `ID()` function that is accesible both via itself and the `Identifiable` interface.
-	// Since `ID()` is available via both ways, the one defined on the struct itself
-	// (here `Person`) gets precedence.
-	return fmt.Sprintf("Persons ID: %s", p.First)
+	return fmt.Sprintf("Persons ID: %s", p.Citizen.ID())
 }
 
 func (p *Person) SetTwitterHandler(handler TwitterHandler) error {
