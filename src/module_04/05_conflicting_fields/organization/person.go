@@ -63,12 +63,12 @@ func (eui europeanUnionIdentifier) Country() string {
 }
 
 type Name struct {
-	first string
+	First string
 	last  string
 }
 
 func (p *Name) FullName() string {
-	return fmt.Sprintf("%s %s", p.first, p.last)
+	return fmt.Sprintf("%s %s", p.First, p.last)
 }
 
 type Employee struct {
@@ -77,6 +77,8 @@ type Employee struct {
 
 type Person struct {
 	Name
+	First          string
+	last           string
 	twitterHandler TwitterHandler
 	Citizen
 }
@@ -84,7 +86,7 @@ type Person struct {
 func NewPerson(firstName, lastName string, citizen Citizen) Person {
 	return Person{
 		Name: Name{
-			first: firstName,
+			First: firstName,
 			last:  lastName,
 		},
 		Citizen: citizen,
@@ -96,7 +98,7 @@ func (p *Person) ID() string {
 	// an `ID()` function that is accesible both via itself and the `Identifiable` interface.
 	// Since `ID()` is available via both ways, the one defined on the struct itself
 	// (here `Person`) gets precedence.
-	return fmt.Sprintf("Persons ID: %s", p.Citizen.ID())
+	return fmt.Sprintf("Persons ID: %s", p.First)
 }
 
 func (p *Person) SetTwitterHandler(handler TwitterHandler) error {
