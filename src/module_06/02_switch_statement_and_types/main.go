@@ -9,7 +9,7 @@ import (
 func main() {
 	p := organization.NewPerson(
 		"James", "Wilson",
-		organization.NewEuropeanUnionIdentifier("123-45-6789", "Germany"),
+		organization.NewEuropeanUnionIdentifier("My Real ID", "Germany"),
 	)
 
 	err := p.SetTwitterHandler("@jam_wils")
@@ -17,4 +17,7 @@ func main() {
 		fmt.Printf("An error occurred setting twitter handler: %s\n", err.Error())
 	}
 	fmt.Printf("%T\n\n", organization.TwitterHandler("test"))
+
+	fmt.Println(p.ID())
+	fmt.Println(p.Country())
 }
