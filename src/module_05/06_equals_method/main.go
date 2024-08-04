@@ -22,23 +22,26 @@ func main() {
 	// eu := organization.NewEuropeanUnionIdentifier("12345", "Germany")
 	// eu2 := organization.NewEuropeanUnionIdentifier("12345", "Germany")
 
-	portfolio := map[Name][]organization.Person{}
-	// using hashable type `Name` as key for our map
-	portfolio[name1] = []organization.Person{p}
+	// portfolio := map[Name][]organization.Person{}
+	// // using hashable type `Name` as key for our map
+	// portfolio[name1] = []organization.Person{p}
 
-	if name1 == (Name{}) {
-		fmt.Println("We match")
+	if name1.Equals(Name{}) {
+		fmt.Println("We've been through so much together and we still match")
 	}
 }
 
 type Name struct {
-	First string
-	Last  string
+	First  string
+	Last   string
+	Middle []string
+}
 
-	// the following will not allow equality check
-	// Middle []string
-	// Middle func()
-	// Middle map[string]string
+func (n Name) Equals(otherName Name) bool {
+	// return true
+
+	// we can also do this
+	return n.First == otherName.First && n.Last == otherName.Last && len(n.Middle) == len(otherName.Middle)
 }
 
 type OtherName struct {
