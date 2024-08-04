@@ -27,6 +27,21 @@ func main() {
 	// if name1 == name3 {
 	// 	fmt.Println("Names match")
 	// }
+
+	ssn := organization.NewSocialSecurityNumber("123-45-6789")
+	eu := organization.NewEuropeanUnionIdentifier("12345", "Germany")
+
+	if ssn == eu {
+		fmt.Println("Interfaces match!!!")
+	} else {
+		fmt.Println("Unfortunately, those Interfaces, they don't match!")
+	}
+
+	// uncommenting the following will produce error and the program will panic
+	// eu2 := organization.NewEuropeanUnionIdentifier("12345", "Germany")
+	// if eu == eu2 {
+	// 	fmt.Println("Those EU Interfaces, they match. No big surprises there.")
+	// }
 }
 
 type Name struct {
