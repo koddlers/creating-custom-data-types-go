@@ -17,7 +17,7 @@ func main() {
 
 	name1 := Name{First: "James", Last: "Wilson"}
 	name2 := Name{First: "James", Last: "Wilson"}
-	name3 := OtherName{First: "James", Last: "Wilson"}
+	// name3 := OtherName{First: "James", Last: "Wilson"}
 
 	if name1 == name2 {
 		fmt.Println("Names match")
